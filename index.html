@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <base href="/Bhavya-Viswanath/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bhavya Viswanath Climate & Carbon Credits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --forest:#162d1e;--forest2:#1f4030;--sage:#4e7258;--moss:#7daa82;
+      --fern:#a8c5a0;--sand:#e9e0cc;--cream:#f7f3ec;--clay:#c8a97e;
+      --bark:#6b4f35;--charcoal:#2b2b2b;--light:#f0ece3;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden}
+
+    /* NAV */
+    nav{background:rgba(22,45,30,.96);backdrop-filter:blur(10px);padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(168,197,160,.12)}
+    .nav-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--sand)}
+    .nav-tagline{font-size:.64rem;color:var(--moss);letter-spacing:.13em;text-transform:uppercase}
+
+    /* HERO */
+    .hero{position:relative;width:100%;height:92vh;min-height:520px;max-height:820px;overflow:hidden;background:var(--forest);display:flex;align-items:stretch}
+    /* Left half text */
+    .hero-left{position:relative;z-index:3;width:52%;display:flex;flex-direction:column;justify-content:flex-end;padding:3.5rem 3rem 4rem;background:linear-gradient(to right,rgba(15,30,20,.98) 60%,rgba(15,30,20,.7) 85%,transparent 100%)}
+    /* Right half photo */
+    .hero-right{position:absolute;right:0;top:0;width:55%;height:100%}
+    .hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    /* Gradient blending photo into dark left */
+    .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(15,30,20,.85) 0%,rgba(15,30,20,.3) 30%,transparent 60%);z-index:1}
+    /* Subtle green tint overlay on photo */
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,20,.6) 0%,transparent 40%);z-index:1}
+    .hero-initials{display:none}
+    .hero-leaf{display:none}
+
+    /* Fade-in animations for hero text elements */
+    .hero-tag-pill{display:inline-block;font-size:.67rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--fern);padding:.3rem .9rem;border:1px solid rgba(168,197,160,.35);border-radius:2rem;margin-bottom:1rem;opacity:0;animation:fadeUp .8s .2s cubic-bezier(.16,1,.3,1) forwards}
+    .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;color:var(--sand);line-height:.95;margin-bottom:.6rem;opacity:0;animation:fadeUp .9s .4s cubic-bezier(.16,1,.3,1) forwards}
+    .hero-name em{font-style:italic;color:var(--fern)}
+    .hero-sub{font-size:.88rem;color:rgba(168,197,160,.75);font-weight:300;margin-bottom:2rem;letter-spacing:.03em;opacity:0;animation:fadeUp .8s .6s cubic-bezier(.16,1,.3,1) forwards}
+    .hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s cubic-bezier(.16,1,.3,1) forwards}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:.3rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .2s;font-family:'Jost',sans-serif}
+    .btn-g{background:var(--moss);color:var(--forest)}
+    .btn-g:hover{background:var(--fern);transform:translateY(-1px)}
+    .btn-o{background:rgba(255,255,255,.08);color:var(--fern);border:1px solid rgba(168,197,160,.35);backdrop-filter:blur(6px)}
+    .btn-o:hover{background:rgba(255,255,255,.14);border-color:var(--moss);color:var(--moss)}
+
+    /* TABS */
+    .tabs-bar{background:var(--forest);border-bottom:1px solid rgba(168,197,160,.12);display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:57px;z-index:100}
+    .tabs-bar::-webkit-scrollbar{display:none}
+    .tab-btn{padding:.9rem 1.5rem;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(168,197,160,.42);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;font-family:'Jost',sans-serif;display:flex;align-items:center;gap:.4rem}
+    .tab-btn:hover{color:var(--fern)}
+    .tab-btn.active{color:var(--moss);border-bottom-color:var(--moss)}
+
+    /* PANELS */
+    .tab-panel{display:none;padding:3.5rem 3rem;max-width:1100px;margin:0 auto}
+    .tab-panel.active{display:block}
+    .sec-label{font-size:.67rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+    .sec-label::before{content:'';display:block;width:26px;height:1.5px;background:var(--moss)}
+    h2.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:300;color:var(--forest);line-height:1.15;margin-bottom:2.5rem}
+    h2.sec-title em{font-style:italic;color:var(--sage)}
+
+    /* ── SUMMARY ── */
+    .summary-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+    .intro-p{font-size:.95rem;font-weight:300;color:#4a4a4a;line-height:1.9;margin-bottom:1rem}
+    .summary-links{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.5rem}
+    .summary-right{display:flex;flex-direction:column;gap:1.5rem}
+    .video-block{background:var(--forest2);border-radius:.8rem;padding:1.8rem;border:1px solid rgba(168,197,160,.1)}
+    .video-block-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fern);font-weight:600;margin-bottom:1rem}
+    .video-ph{background:rgba(0,0,0,.25);border-radius:.5rem;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:rgba(168,197,160,.3);font-size:.78rem;font-style:italic;border:1px dashed rgba(168,197,160,.18)}
+    .qf-box{background:var(--light);border-radius:.8rem;padding:1.8rem;border:1px solid rgba(78,114,88,.12)}
+    .qf-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:1.2rem}
+    .qf-item{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:.8rem;font-size:.84rem;color:#4a4a4a;font-weight:300;line-height:1.5}
+
+    /* ── ABOUT ── */
+    .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+    .edu-card{background:var(--forest);border-radius:1rem;padding:2.5rem;color:var(--sand);position:relative;overflow:hidden;margin-bottom:1.5rem}
+    .edu-card::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(125,170,130,.06)}
+    .edu-uni{font-size:.67rem;letter-spacing:.15em;text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:.4rem}
+    .edu-degree{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:.3rem}
+    .edu-dates{font-size:.78rem;color:var(--moss);margin-bottom:1.2rem}
+    .edu-gpa{display:inline-flex;align-items:center;gap:.5rem;background:rgba(125,170,130,.12);border:1px solid rgba(125,170,130,.25);border-radius:.3rem;padding:.35rem .9rem;font-size:.78rem;color:var(--fern);margin-bottom:1rem}
+    .edu-note{font-size:.8rem;color:rgba(233,224,204,.62);line-height:1.6;display:flex;gap:.6rem}
+    .edu-note span{color:var(--clay);flex-shrink:0}
+    .grades-wrap{background:white;border-radius:.8rem;border:1px solid rgba(78,114,88,.1);padding:.4rem 1.5rem;margin-top:.8rem}
+    .grade-row{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0;border-bottom:1px solid rgba(78,114,88,.08)}
+    .grade-row:last-child{border-bottom:none}
+    .grade-course{font-size:.86rem;font-weight:400;color:var(--charcoal)}
+    .grade-badge{font-size:.78rem;font-weight:700;padding:.22rem .65rem;border-radius:.22rem}
+    .ap{background:rgba(22,45,30,.1);color:var(--forest)}
+    .a{background:rgba(78,114,88,.1);color:var(--sage)}
+    .bp{background:rgba(200,169,126,.14);color:var(--bark)}
+    .about-links{display:flex;flex-direction:column;gap:1rem}
+
+    /* ── EXPERIENCE ── */
+    .exp-item{display:flex;gap:2rem;padding:2.5rem 0;border-bottom:1px solid rgba(78,114,88,.1);position:relative}
+    .exp-item:last-child{border-bottom:none}
+    /* Logo column */
+    .exp-logo-col{width:80px;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding-top:.2rem}
+    .exp-logo{width:72px;height:72px;border-radius:.5rem;border:1px solid rgba(78,114,88,.15);background:white;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.4rem}
+    .exp-logo img{width:100%;height:100%;object-fit:contain}
+    .exp-logo-ph{width:72px;height:72px;border-radius:.5rem;border:1px solid rgba(78,114,88,.15);background:var(--light);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    /* Main content */
+    .exp-main{flex:1}
+    .exp-company{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--forest);line-height:1.1;margin-bottom:.2rem}
+    .exp-dates{font-size:.72rem;font-weight:500;letter-spacing:.1em;color:var(--sage);text-transform:uppercase;margin-bottom:.4rem}
+    .exp-role{font-size:.82rem;font-weight:600;color:var(--clay);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.8rem}
+    .exp-bullets{list-style:none;padding:0}
+    .exp-bullets li{font-size:.86rem;font-weight:300;color:#4a4a4a;line-height:1.7;margin-bottom:.4rem;padding-left:1.2rem;position:relative}
+    .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--moss);font-size:.73rem}
+    .exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+    .tag{font-size:.63rem;font-weight:500;letter-spacing:.08em;padding:.23rem .65rem;border:1px solid rgba(78,114,88,.22);border-radius:2rem;color:var(--sage);text-transform:uppercase}
+
+    /* ── PROJECTS ── */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+    .proj-card{background:white;border-radius:.9rem;border:1px solid rgba(78,114,88,.1);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+    .proj-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(22,45,30,.1)}
+    .proj-card.wide{grid-column:span 2}
+    .proj-card.full{grid-column:span 3}
+    .proj-thumb{height:200px;position:relative;overflow:hidden;background:var(--forest2)}
+    .proj-card.wide .proj-thumb{height:240px}
+    .proj-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .proj-card:hover .proj-thumb img{transform:scale(1.04)}
+    .proj-thumb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(22,45,30,.72) 0%,rgba(22,45,30,.05) 55%)}
+    .proj-thumb-label{position:absolute;bottom:1.1rem;left:1.4rem;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(168,197,160,.85)}
+    .proj-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.2}
+    .proj-body{padding:1.4rem;flex:1;display:flex;flex-direction:column}
+    .proj-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--forest);margin-bottom:.5rem;line-height:1.2}
+    .proj-desc{font-size:.82rem;font-weight:300;color:#5a5a5a;line-height:1.75;flex:1;margin-bottom:1rem}
+    .proj-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);text-decoration:none;transition:color .2s}
+    .proj-link:hover{color:var(--forest)}
+    .proj-note{font-size:.72rem;font-style:italic;color:rgba(78,114,88,.42);margin-top:.3rem}
+
+    /* ── CERTIFICATIONS ── */
+    .certs-list{display:flex;flex-direction:column;gap:1.8rem}
+    .cert-row{display:grid;grid-template-columns:320px 1fr;background:white;border-radius:1rem;border:1px solid rgba(78,114,88,.12);overflow:hidden;transition:box-shadow .25s}
+    .cert-row:hover{box-shadow:0 8px 28px rgba(22,45,30,.1)}
+    .cert-img-wrap{background:#f0ece3;display:flex;align-items:center;justify-content:center;padding:1.4rem;border-right:1px solid rgba(78,114,88,.08);min-height:160px}
+    .cert-img-wrap img{width:100%;border-radius:.4rem;box-shadow:0 3px 14px rgba(0,0,0,.14);transition:transform .3s}
+    .cert-row:hover .cert-img-wrap img{transform:scale(1.02)}
+    .cert-info{padding:1.8rem 2rem;display:flex;flex-direction:column;justify-content:center}
+    .cert-issuer{font-size:.67rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--clay);margin-bottom:.45rem}
+    .cert-name-big{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--forest);margin-bottom:.35rem;line-height:1.2}
+    .cert-date{font-size:.78rem;color:var(--sage);margin-bottom:1rem;line-height:1.55}
+    .cert-verify{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);text-decoration:none;padding:.38rem .85rem;border:1px solid rgba(78,114,88,.22);border-radius:.25rem;transition:all .2s;width:fit-content}
+    .cert-verify:hover{background:var(--forest);color:var(--fern);border-color:transparent}
+    .cert-row.mini{grid-template-columns:80px 1fr}
+    .cert-row.mini .cert-img-wrap{min-height:80px;padding:.8rem}
+    .cert-row.mini .cert-info{padding:1.2rem 1.5rem}
+    .cert-row.mini .cert-name-big{font-size:1.05rem}
+    .cert-ph-mini{width:54px;height:54px;border-radius:.3rem;background:linear-gradient(135deg,var(--light),var(--sand));display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+
+    /* ── EXTRA ── */
+    .extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
+    .eic-card{background:var(--forest);border-radius:1rem;padding:2.5rem;grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+    .eic-lbl{font-size:.67rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--fern);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+    .eic-lbl::before{content:'';display:block;width:26px;height:1.5px;background:var(--fern)}
+    .eic-title-text{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--sand);margin-bottom:.8rem}
+    .eic-title-text em{font-style:italic;color:var(--fern)}
+    .eic-desc{font-size:.87rem;color:rgba(233,224,204,.65);line-height:1.8;font-weight:300}
+    .eic-roles{display:flex;flex-direction:column;gap:1rem}
+    .eic-role{background:rgba(255,255,255,.04);border:1px solid rgba(168,197,160,.14);border-radius:.6rem;padding:1.2rem}
+    .eic-role-title{font-size:.88rem;font-weight:600;color:var(--fern);margin-bottom:.2rem}
+    .eic-role-dates{font-size:.7rem;color:var(--moss)}
+    .eic-role-desc{font-size:.78rem;color:rgba(168,197,160,.45);margin-top:.35rem;line-height:1.5}
+    .hobby-card{background:white;border-radius:.9rem;border:1px solid rgba(78,114,88,.1);overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .hobby-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(22,45,30,.08)}
+    .hobby-img{height:190px;overflow:hidden;position:relative;background:var(--light)}
+    .hobby-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.18;background:linear-gradient(135deg,var(--light),var(--sand))}
+    .hobby-ph-label{position:absolute;bottom:.7rem;right:.8rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(78,114,88,.4);font-style:italic}
+    .hobby-body{padding:1.5rem}
+    .hobby-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--forest);margin-bottom:.4rem}
+    .hobby-desc{font-size:.83rem;font-weight:300;color:#5a5a5a;line-height:1.7}
+    .hobby-gallery{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}
+    .hobby-ph-slot{aspect-ratio:1;border-radius:.35rem;border:1px dashed rgba(78,114,88,.2);display:flex;align-items:center;justify-content:center;font-size:.57rem;color:rgba(78,114,88,.35);letter-spacing:.07em;text-transform:uppercase;text-align:center;padding:.4rem;background:var(--light)}
+
+    /* ── RECS ── */
+    .recs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
+    .rec-card{background:var(--forest2);border:1px solid rgba(168,197,160,.12);border-radius:1rem;padding:2.5rem;position:relative}
+    .rec-q{font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(125,170,130,.1);position:absolute;top:.3rem;left:1.5rem;line-height:1}
+    .rec-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--sand);line-height:1.75;margin-bottom:1.8rem;position:relative;z-index:1}
+    .rec-text.ph{color:rgba(168,197,160,.25)}
+    .rec-author{display:flex;align-items:center;gap:1rem}
+    .rec-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--moss),var(--sage));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--forest);flex-shrink:0}
+    .rec-name{font-size:.84rem;font-weight:600;color:var(--fern)}
+    .rec-name.ph{color:rgba(168,197,160,.25)}
+    .rec-role-t{font-size:.72rem;color:rgba(168,197,160,.4)}
+    .rec-add{text-align:center;padding:3rem 2rem;background:rgba(255,255,255,.02);border:1px dashed rgba(168,197,160,.12);border-radius:1rem;grid-column:span 2;color:rgba(168,197,160,.25);font-size:.83rem;font-style:italic}
+
+    footer{background:var(--forest);padding:1.8rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(168,197,160,.1)}
+    footer p{font-size:.7rem;color:rgba(168,197,160,.3)}
+
+    @media(max-width:900px){
+      nav,footer{padding:1rem 1.5rem}
+      .hero{height:80vh}
+      .hero-left{width:100%;padding:2rem 1.5rem 2.5rem;background:linear-gradient(to top,rgba(15,30,20,.98) 50%,rgba(15,30,20,.6) 80%,transparent 100%)}
+      .hero-right{width:100%}
+      .tab-panel{padding:2.5rem 1.5rem}
+      .about-layout,.summary-grid,.extra-grid,.recs-grid{grid-template-columns:1fr}
+      .eic-card{grid-column:span 1;grid-template-columns:1fr}
+      .projects-grid{grid-template-columns:1fr}
+      .proj-card.wide{grid-column:span 1}
+      .proj-card.full{grid-column:span 1}
+      .cert-row,.cert-row.mini{grid-template-columns:1fr}
+      .cert-img-wrap{min-height:auto;border-right:none;border-bottom:1px solid rgba(78,114,88,.08)}
+      .exp-item{flex-direction:column;gap:1rem}
+      .rec-add{grid-column:span 1}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div></div>
+  <div style="position:relative;">
+    <button onclick="toggleNavEmail()" class="btn btn-o" style="font-size:.67rem;" id="nav-git-btn">✉ Get in Touch</button>
+    <div id="nav-email-popup" style="display:none;position:absolute;right:0;top:calc(100% + .5rem);background:var(--forest2);border:1px solid rgba(168,197,160,.2);border-radius:.5rem;padding:.8rem 1rem;white-space:nowrap;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.3);">
+      <div style="font-size:.7rem;color:var(--moss);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;">Email</div>
+      <div style="display:flex;align-items:center;gap:.8rem;">
+        <span style="font-size:.85rem;color:var(--sand);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25471513534c5652654248444c490b464a48">[email&#160;protected]</a></span>
+        <button onclick="copyEmail()" id="nav-copy-btn" style="font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);background:none;border:1px solid rgba(78,114,88,.3);border-radius:.2rem;padding:.2rem .55rem;cursor:pointer;font-family:'Jost',sans-serif;">Copy</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('summary',this)">🏠 Home</button>
+  <button class="tab-btn" onclick="switchTab('about',this)">🎓 About</button>
+  <button class="tab-btn" onclick="switchTab('experience',this)">💼 Experience</button>
+  <button class="tab-btn" onclick="switchTab('projects',this)">📁 Projects</button>
+  <button class="tab-btn" onclick="switchTab('certifications',this)">🏅 Certifications</button>
+  <button class="tab-btn" onclick="switchTab('extra',this)">⭐ Extracurriculars</button>
+
+</div>
+
+<!-- HERO -->
+<div class="hero" id="hero-section">
+  <!-- Right: photo -->
+  <div class="hero-right">
+    <img src="profile.jpg" alt="Bhavya Viswanath">
+  </div>
+  <!-- Left: text fades in -->
+  <div class="hero-left">
+    <div class="hero-tag-pill">🌿 Graduating 2026 · BBA · Mahindra University</div>
+    <h1 class="hero-name">Bhavya <em>Viswanath</em></h1>
+    <p class="hero-sub">Business Student &nbsp;·&nbsp; Climate &amp; Carbon Markets &nbsp;·&nbsp; ESG Research &nbsp;·&nbsp; Hyderabad, India</p>
+    
+  </div>
+</div>
+
+<!-- ══════ SUMMARY / HOME ══════ -->
+<div id="tab-summary" class="tab-panel active">
+</div>
+
+<!-- ══════ ABOUT ══════ -->
+<div id="tab-about" class="tab-panel">
+  <div class="about-layout">
+    <!-- LEFT: intro paragraphs only -->
+    <div>
+      <h2 class="sec-title" style="font-style:italic;font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.4;margin-bottom:1.8rem;color:var(--forest);">"There's no point counting the stairs before you start climbing."</h2>
+      <p class="intro-p">I'm drawn to this quote because it reflects the kind of path I've chosen for myself. The career I'm pursuing doesn't come with a clear, followable structure or a well defined roadmap. That uncertainty can feel overwhelming, especially when there's so much that is still unknown and so much left to figure out. But instead of getting stuck in that, I've learned to approach things step by step. I focus on understanding what's in front of me, figuring out how things actually work, rather than panicking about the scale of what I don't yet know.</p>
+      <p class="intro-p">That's also why carbon removal feels like the right space for me. It carries a larger vision of creating real change, something that directly contributes to the public good and addresses a need that is urgent right now. Being part of something that is still being shaped, while also having the potential to create meaningful impact, is what keeps me genuinely interested and invested.</p>
+      <p class="intro-p">Alongside this, I'm drawn to strong branding and storytelling, especially the kind that builds a clear sense of purpose and brings people together around ideas that matter. I'm equally interested in going beyond the surface level, understanding how a business truly runs, how decisions are made, how systems function, and how everything comes together behind the scenes. I naturally lean towards learning the core ins and outs rather than just observing outcomes.</p>
+      <p class="intro-p">I'm constantly trying to learn and improve in a way that feels intentional. On one side, I actively explore and work with AI tools, understanding how they can be used effectively. On the other, I consciously take time away from fast moving screens to reduce constant stimulation, improve focus, and build a healthier attention span. For me, it's about creating a balance that allows me to think clearly, stay grounded, and keep moving forward with purpose.</p>
+    </div>
+    <!-- RIGHT: video + edu + courses + contact -->
+    <div>
+      <div class="video-block" style="margin-bottom:1.5rem;">
+        <div class="video-block-title">🎬 Video Introduction</div>
+        <div class="video-ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Video introduction coming soon
+        </div>
+      </div>
+      <div class="edu-card" style="margin-bottom:1.2rem;">
+        <div class="edu-uni">Mahindra University · Hyderabad, India</div>
+        <div class="edu-degree">Bachelor of Business Administration</div>
+        <div class="edu-dates">August 2023 – 2026 (Expected Graduation)</div>
+        <div class="edu-gpa">⭐ GPA 8.3 / 10</div>
+        <div class="edu-note"><span>🏅</span>Best-in-Class Research Project (Dec 2024) analysed graduate outcomes in India using Excel-based surveys and z-tests.</div>
+      </div>
+      <div class="sec-label" style="margin-bottom:.6rem;">Academic Performance · Relevant Courses</div>
+      <div class="grades-wrap" style="margin-bottom:1.5rem;">
+        <div class="grade-row"><span class="grade-course">Business Communications</span><span class="grade-badge ap">A+</span></div>
+        <div class="grade-row"><span class="grade-course">Entrepreneurship &amp; New Venture Creation</span><span class="grade-badge a">A</span></div>
+        <div class="grade-row"><span class="grade-course">UI/UX Design Principles</span><span class="grade-badge a">A</span></div>
+        <div class="grade-row"><span class="grade-course">Business Strategy</span><span class="grade-badge bp">B+</span></div>
+        <div class="grade-row"><span class="grade-course">Connected Technologies</span><span class="grade-badge ap">A+</span></div>
+        <div class="grade-row"><span class="grade-course">Customer Experience</span><span class="grade-badge ap">A+</span></div>
+        <div class="grade-row"><span class="grade-course">Branding &amp; Brand Management</span><span class="grade-badge a">A</span></div>
+        <div class="grade-row"><span class="grade-course">Principles of E-commerce &amp; Marketplaces</span><span class="grade-badge ap">A+</span></div>
+      </div>
+      <div class="about-links">
+        <a href="https://www.linkedin.com/in/bhavya-viswanath-b19249296" target="_blank" rel="noopener noreferrer" class="btn" style="background:var(--forest);color:var(--fern);justify-content:center;padding:1rem;">💼 &nbsp;LinkedIn ↗</a>
+        <a href="Bhavya_Viswanath_Resume.pdf" download="Bhavya Viswanath Resume.pdf" class="btn" style="background:var(--sage);color:white;justify-content:center;padding:1rem;">📄 &nbsp;Download Resume</a>
+        <a href="tel:9010990903" class="btn btn-o" style="border-color:rgba(78,114,88,.3);color:var(--sage);justify-content:center;padding:1rem;">📞 &nbsp;+91 90109 90903</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ EXPERIENCE ══════ -->
+<div id="tab-experience" class="tab-panel">
+  <h2 class="sec-title">Work <em>Experience</em></h2>
+  <div>
+
+    <!-- Greenko -->
+    <div class="exp-item">
+      <div class="exp-logo-col">
+        <div class="exp-logo"><img src="greenko.png" alt="Greenko"></div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-company">Greenko Group</div>
+        <div class="exp-dates">Jun Aug 2025</div>
+        <div class="exp-role">Research Intern</div>
+        <ul class="exp-bullets">
+          <li>Analysed CEA, NLDC, and MNRE data to assess India's 2030 renewable energy targets.</li>
+          <li>Built Excel dashboards and forecasting models projecting capacity and generation mix.</li>
+          <li>Consolidated insights into visual reports used by Greenko's strategy team for planning.</li>
+        </ul>
+        <div class="exp-tags"><span class="tag">Renewable Energy</span><span class="tag">Excel Dashboards</span><span class="tag">Forecasting</span><span class="tag">Data Analysis</span></div>
+      </div>
+    </div>
+
+    <!-- Mangamma Foods / Ammamma's work experience only (not consulting project) -->
+    <div class="exp-item">
+      <div class="exp-logo-col">
+        <div class="exp-logo" style="border-radius:50%;padding:.2rem;"><img src="ammammas_logo.png" alt="Ammamma's" style="border-radius:50%"></div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-company">Mangamma Foods Pvt. Ltd.</div>
+        <div class="exp-dates">Dec 2024 Jan 2025</div>
+        <div class="exp-role">Business Intern &nbsp;·&nbsp; <span style="color:var(--sage);font-style:italic;">Ammamma's Brand</span></div>
+        <ul class="exp-bullets">
+          <li>Assisted in investor meetings by preparing financial and marketing briefs for upcoming product lines.</li>
+          <li>Evaluated Q-commerce marketing campaigns and proposed budget reallocations to improve promotional reach.</li>
+          <li>Conducted nationwide pickle-market research and contributed to packaging and label design for new launches.</li>
+        </ul>
+        <div class="exp-tags"><span class="tag">Investor Relations</span><span class="tag">Market Research</span><span class="tag">Marketing Strategy</span><span class="tag">Q-Commerce</span></div>
+      </div>
+    </div>
+
+    <!-- GAIA -->
+    <div class="exp-item">
+      <div class="exp-logo-col">
+        <div class="exp-logo" style="padding:0;overflow:hidden;"><img src="gaia_team.png" alt="GAIA Team" style="object-fit:cover;width:100%;height:100%"></div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-company">GAIA</div>
+        <div class="exp-dates">Dec 2023 Oct 2024</div>
+        <div class="exp-role">Founder · Ideation Development</div>
+        <ul class="exp-bullets">
+          <li>Co-founded and led the ideation of a concept to convert agricultural waste into biochar as a mechanism for carbon credit generation and soil health improvement.</li>
+          <li>Researched carbon-credit frameworks, ESG impact metrics, and biochar market sizing through the ideation phase.</li>
+          <li>Presented the concept at the Hult Prize Mumbai Summit ranked <strong>Top 360 of 10,000 teams globally</strong>.</li>
+        </ul>
+        <div class="exp-tags"><span class="tag">Carbon Credits</span><span class="tag">ESG Research</span><span class="tag">Hult Prize</span><span class="tag">Market Research</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ PROJECTS ══════ -->
+<div id="tab-projects" class="tab-panel">
+  <h2 class="sec-title">Projects &amp; <em>Case Studies</em></h2>
+  <div class="projects-grid">
+
+    <!-- Research Paper -->
+    <div class="proj-card full">
+      <div class="proj-thumb" style="background:var(--forest);">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-ph">📄</div>
+        <div class="proj-thumb-label">Carbon Markets · Policy · Research</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Integrity: The New Currency of Carbon Markets — CRCF, PACM, and the Cost of Regulatory Misalignment</div>
+        <p class="proj-desc">Co-authored with Akshith Bathena and Dr. Vinay Sharma. Examines regulatory misalignment between the EU's Carbon Removals and Carbon Farming Certification Regulation (CRCF) and the Paris Agreement Crediting Mechanism (PACM), with a focus on double-counting risks and verification arbitrage for biochar and enhanced rock weathering projects in India.</p>
+        <p class="proj-note">📎 Paper in progress</p>
+      </div>
+    </div>
+
+    <!-- Podcast wide -->
+    <div class="proj-card wide">
+      <div class="proj-thumb">
+        <img src="podcast_thumb.png" alt="People and Purpose Podcast">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">Media · Leadership · Podcast</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">People &amp; Purpose Podcast</div>
+        <p class="proj-desc">Co-hosted Episode 01 of "People &amp; Purpose" with Hrishikesh Kashyap exploring the 6 Habits of Exceptional Leaders. A conversation about purpose-driven leadership, real-world decision making, and building a meaningful career.</p>
+        <a href="https://youtu.be/-UvMBfDRasw?si=eAP-xW8cOxAkXLqg" target="_blank" class="proj-link">▶ Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <!-- ShadeSync -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="shadesync_thumb.png" alt="ShadeSync">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">UX · AI · Customer Experience</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">ShadeSync AI Makeup Shade Matcher</div>
+        <p class="proj-desc">Designed and built an AI-powered app that analyses skin tone and undertone to recommend cross-brand makeup shades. Built using the Loveable AI tool as part of a UX &amp; Customer Experience course project.</p>
+        <p class="proj-note">📎 Full CX report coming soon</p>
+      </div>
+    </div>
+
+    <!-- Ammamma's Brand Consulting moved here from experience -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="ammammas_thumb.png" alt="Ammamma's Brand" style="width:100%;height:100%;object-fit:cover">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">Consulting · Q-Commerce · Brand Strategy</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Ammamma's Market Strategy Consulting</div>
+        <p class="proj-desc">Consumer perception and competitive benchmarking project for Ammamma's (Mangamma Foods). Developing strategic positioning and customer-recall recommendations to strengthen presence across Q-commerce platforms.</p>
+        <p class="proj-note">📎 Report in progress coming soon</p>
+      </div>
+    </div>
+
+    <!-- Education Interrupted -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="research_cover-01.png" alt="Education Interrupted Research Report">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">Research · Business Communications</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Education Interrupted Research Report</div>
+        <p class="proj-desc">Primary research into the decline of emerging graduates in India. Used surveys, z-tests, and Excel analysis to examine curriculum gaps, institutional support, and graduate readiness. Awarded Best-in-Class.</p>
+        <p class="proj-note">📎 Full report coming soon</p>
+      </div>
+    </div>
+
+    <!-- UI/UX Dating App -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="dating_thumb.png" alt="Dating App UI/UX">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">UI/UX · Product Design</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Dating App UI/UX Redesign</div>
+        <p class="proj-desc">Redesigned the user interface and experience of a dating app to improve usability, safety cues, and match quality. Applied user research, wireframing, and interaction design principles.</p>
+        <p class="proj-note">📎 Presentation coming soon</p>
+      </div>
+    </div>
+
+    <!-- Autoeye Vehicles -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="autoeye_thumb.png" alt="Autoeye Vehicles">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">IoT · Connected Technologies</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Autoeye Vehicles IoT Business Solution</div>
+        <p class="proj-desc">Explored how IoT devices can be deployed within a business context to improve societal outcomes focusing on vehicle monitoring and intelligent fleet insights to reduce inefficiencies and emissions.</p>
+        <p class="proj-note">📎 Project details coming soon</p>
+      </div>
+    </div>
+
+    <!-- Anveza.Ai Capstone -->
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <img src="anveza_thumb.png" alt="Anveza.Ai">
+        <div class="proj-thumb-ov"></div>
+        <div class="proj-thumb-label">AI · Capstone · Strategy</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Anveza.Ai Capstone Project</div>
+        <p class="proj-desc">Collaborating directly with the founders of Anveza.Ai on a capstone project. Working on strategy, business development, and understanding how AI tools can be positioned for real-world impact.</p>
+        <p class="proj-note">📎 Project in progress</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ CERTIFICATIONS ══════ -->
+<div id="tab-certifications" class="tab-panel">
+  <h2 class="sec-title">Certifications &amp; <em>Courses</em></h2>
+  <div class="certs-list">
+
+    <div class="cert-row">
+      <div class="cert-img-wrap"><img src="cert_investor-1.png" alt="ESG Impact: Investor Perspective"></div>
+      <div class="cert-info">
+        <div class="cert-issuer">University of Pennsylvania · The Wharton School · Coursera</div>
+        <div class="cert-name-big">ESG Impact: Investor Perspective</div>
+        <div class="cert-date">📅 Completed February 3, 2026 &nbsp;·&nbsp; Prof. Christopher Geczy<br>Adjunct Professor of Finance · Academic Director, Wharton Wealth Management Initiative</div>
+        <a href="https://coursera.org/verify/XS05QGL1HC8D" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+      </div>
+    </div>
+
+    <div class="cert-row">
+      <div class="cert-img-wrap"><img src="cert_risks-1.png" alt="ESG Risks and Opportunities"></div>
+      <div class="cert-info">
+        <div class="cert-issuer">University of Pennsylvania · The Wharton School · Coursera</div>
+        <div class="cert-name-big">ESG Risks and Opportunities</div>
+        <div class="cert-date">📅 Completed February 3, 2026 &nbsp;·&nbsp; Prof. Witold Henisz<br>Deloitte &amp; Touche Professor of Management · Director, Political Risk Lab</div>
+        <a href="https://coursera.org/verify/A4UM3I41NXR2" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+      </div>
+    </div>
+
+    <div class="cert-row">
+      <div class="cert-img-wrap"><img src="cert_climate-1.png" alt="ESG and Climate Change"></div>
+      <div class="cert-info">
+        <div class="cert-issuer">University of Pennsylvania · The Wharton School · Coursera</div>
+        <div class="cert-name-big">ESG and Climate Change</div>
+        <div class="cert-date">📅 Completed January 28, 2026 &nbsp;·&nbsp; Prof. Sarah E. Light<br>Associate Professor, Legal Studies &amp; Business Ethics, Wharton</div>
+        <a href="https://coursera.org/verify/QXVJDKJ8PJN8" target="_blank" class="cert-verify">✓ Verify Certificate ↗</a>
+      </div>
+    </div>
+
+    <!-- Marketplace Simulations -->
+    <div class="cert-row">
+      <div class="cert-img-wrap"><img src="marketplace_cert.png" alt="Marketplace Simulations Certificate"></div>
+      <div class="cert-info">
+        <div class="cert-issuer">Marketplace Simulations</div>
+        <div class="cert-name-big">Certificate of Completion Marketplace Simulation</div>
+        <div class="cert-date">Awarded for successfully completing a Marketplace business simulation managing product portfolios, advertising campaigns, distribution channels, demand, sales, and finances in a simulated competitive environment using the Balanced Scorecard framework.</div>
+      </div>
+    </div>
+
+    <div class="cert-row mini">
+      <div class="cert-img-wrap"><div class="cert-ph-mini">📊</div></div>
+      <div class="cert-info">
+        <div class="cert-issuer">Udemy</div>
+        <div class="cert-name-big">Microsoft Excel Beginner to Advanced</div>
+      </div>
+    </div>
+
+    <div class="cert-row mini">
+      <div class="cert-img-wrap"><div class="cert-ph-mini">🌍</div></div>
+      <div class="cert-info">
+        <div class="cert-issuer">UNCC United Nations Climate Change</div>
+        <div class="cert-name-big">Climate Change: From Learning to Action</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════ EXTRACURRICULARS ══════ -->
+<div id="tab-extra" class="tab-panel">
+  <h2 class="sec-title">Extracurricular <em>Activities</em></h2>
+  <div class="extra-grid">
+
+    <div class="eic-card">
+      <div>
+        <div class="eic-lbl">Leadership · On Campus</div>
+        <div class="eic-title-text">Entrepreneurship &amp;<br><em>Innovation Cell</em></div>
+        <p class="eic-desc">Mahindra University's EIC drives campus entrepreneurship in coordination with the Institution's Innovation Council of India. Led 15+ volunteers across events and campus-wide initiatives.</p>
+        <div style="margin-top:1.2rem;border-radius:.6rem;overflow:hidden;height:180px;">
+          <img src="entrepy25.png" alt="EntrepX 25" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+        </div>
+      </div>
+      <div class="eic-roles">
+        <div class="eic-role">
+          <div class="eic-role-title">🏛️ Vice-President</div>
+          <div class="eic-role-dates">November 2024 August 2025</div>
+          <div class="eic-role-desc">Led campus entrepreneurship initiatives; managed 15+ volunteers across events, workshops, and documentation.</div>
+        </div>
+        <div class="eic-role">
+          <div class="eic-role-title">📋 Secretary</div>
+          <div class="eic-role-dates">September November 2024</div>
+          <div class="eic-role-desc">Supported event communications, vendor coordination, and social-media outreach.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hobby-card">
+      <div class="hobby-img">
+        <img src="horse1.jpeg" alt="Horse riding" style="width:100%;height:100%;object-fit:cover;transition:transform .4s">
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">🐴 Horse Riding</div>
+        <p class="hobby-desc">An equestrian enthusiast who finds balance and discipline in riding. The focus, patience, and non-verbal communication that riding demands translate powerfully into leadership.</p>
+        <div class="hobby-gallery">
+          <img src="horse1.jpeg" alt="Horse riding 1" style="aspect-ratio:1;object-fit:cover;border-radius:.35rem;width:100%">
+          <img src="horse2.jpeg" alt="Horse riding 2" style="aspect-ratio:1;object-fit:cover;border-radius:.35rem;width:100%">
+        </div>
+      </div>
+    </div>
+
+    <div class="hobby-card">
+      <div class="hobby-img">
+        <div class="hobby-img-ph">📚</div>
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">📚 Book Reading</div>
+        <p class="hobby-desc">Drawn to books at the intersection of business, sustainability, and human behaviour a creative outlet and a way to stay intellectually curious about the world.</p>
+        <div class="hobby-gallery">
+          <div class="hobby-ph-slot">Add photo</div>
+          <div class="hobby-ph-slot">Add photo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hobby-card">
+      <div class="hobby-img">
+        <div class="hobby-img-ph">🏺</div>
+        <div class="hobby-ph-label">Add your photo here</div>
+      </div>
+      <div class="hobby-body">
+        <div class="hobby-title">🏺 Miniature Clay Modelling</div>
+        <p class="hobby-desc">Creates intricate miniature sculptures in polymer clay a meditative craft that sharpens attention to detail and spatial thinking in a very hands-on way.</p>
+        <div class="hobby-gallery">
+          <div class="hobby-ph-slot">Add photo</div>
+          <div class="hobby-ph-slot">Add photo</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Bhavya Viswanath</p>
+  <p>Climate · Carbon · Change</p>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  var hero=document.getElementById('hero-section');
+  if(id==='summary'){hero.style.display='flex';}else{hero.style.display='none';}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleNavEmail(){
+  const pop=document.getElementById('nav-email-popup');
+  pop.style.display=pop.style.display==='none'?'block':'none';
+}
+document.addEventListener('click',function(e){
+  const btn=document.getElementById('nav-git-btn');
+  const pop=document.getElementById('nav-email-popup');
+  if(pop&&btn&&!btn.contains(e.target)&&!pop.contains(e.target)){pop.style.display='none';}
+});function copyEmail(){
+  navigator.clipboard.writeText('b06visw@gmail.com').then(function(){
+    ['nav-copy-btn','copy-email-btn'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el){var orig=el.textContent;el.textContent='Copied!';setTimeout(function(){el.textContent=orig;},2000);}
+    });
+    document.querySelectorAll('[onclick="copyEmail()"]').forEach(function(el){
+      var orig=el.textContent;el.textContent='Copied!';setTimeout(function(){el.textContent=orig;},2000);
+    });
+  });
+}
+</script>
+</body>
+</html>
